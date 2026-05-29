@@ -158,7 +158,9 @@ fn main() -> Result<()> {
         // Here we compute the rendered egui frame
         let egui_frame: TextureRenderElement<GlesTexture> = egui
             .render(
-                |ctx| demo_ui.ui(ctx),
+                |ctx| {
+                    demo_ui.ui(ctx)
+                },
                 backend.renderer(),
                 // Just render it over the whole window, but you may limit the area
                 Rectangle::from_size(size.to_logical(1)),
@@ -180,6 +182,7 @@ fn main() -> Result<()> {
                 egui_frame.geometry(1.0.into()),
                 &[Rectangle::from_size(size)],
                 &[],
+                None,
             )?;
         }
         std::mem::drop(fb);
