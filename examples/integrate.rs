@@ -158,8 +158,8 @@ fn main() -> Result<()> {
         // Here we compute the rendered egui frame
         let egui_frame: TextureRenderElement<GlesTexture> = egui
             .render(
-                |ctx| {
-                    demo_ui.ui(ctx)
+                |ui| {
+                    demo_ui.ui(ui)
                 },
                 backend.renderer(),
                 // Just render it over the whole window, but you may limit the area

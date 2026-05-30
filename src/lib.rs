@@ -1,6 +1,6 @@
 #[deny(missing_docs)]
 use egui::{Context, Event, FullOutput, Pos2, RawInput, Rect, Vec2};
-use egui::{PlatformOutput, TouchPhase, ViewportId, ViewportInfo};
+use egui::{PlatformOutput, TouchPhase, Ui, ViewportId, ViewportInfo};
 use egui_glow::Painter;
 #[cfg(feature = "desktop_integration")]
 use smithay::desktop::space::{RenderZindex, SpaceElement};
@@ -279,7 +279,7 @@ impl EguiState {
     /// - `modifiers` should be the current state of modifiers pressed on the keyboards.
     pub fn render(
         &self,
-        ui: impl FnMut(&Context),
+        ui: impl FnMut(&mut Ui),
         renderer: &mut GlowRenderer,
         area: Rectangle<i32, Logical>,
         scale: f64,
@@ -363,7 +363,7 @@ impl EguiState {
             shapes,
             textures_delta,
             ..
-        } = self.ctx.run(input.clone(), ui);
+        } = self.ctx.run_ui(input.clone(), ui);
         inner.last_output = Some(platform_output);
 
         let needs_recreate = inner.area != area;
